@@ -26,13 +26,16 @@ session_destroy();
   </head>
   <body>
 
-  <div class="alert alert-warning" role="alert">
-  <h4 class="alert-heading">Logged Out</h4>
-  <p>You have been logged out Successfully.
-  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+          <div class="alert alert-warning" role="alert">
+          <h4 class="alert-heading">Logged Out</h4>
+          <p>You have been logged out successfully.
+          <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
 
-  <p>Please login to continue <a class="btn btn-primary" href="login.php" role="button">Login</a></p>
-</div>
+          <p>Please login to continue <a class="btn btn-primary" href="login.php" role="button">Login</a></p>
+  </div>
+
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
