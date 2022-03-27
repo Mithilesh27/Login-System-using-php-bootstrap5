@@ -29,7 +29,7 @@ if(!isset($_SESSION['loggedin'])|| $_SESSION['loggedin']==false){
 
 
 
-    <div class="container">
+    <div class="container mt-4">
         
         <h1 class="text-primary"> Welcome <span class="text-danger"><?php  echo $_SESSION['username']?> </span> Welcome to TechyTech</h1>
 
@@ -37,7 +37,7 @@ if(!isset($_SESSION['loggedin'])|| $_SESSION['loggedin']==false){
             <h4 class="alert-heading">Well done!</h4>
             <p> Hello there, you are logged in to out website. You can log out using the button.<a href="logout.php">Log Out</a></p>
             <hr>
-            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+            <p class="mb-0"></p>
         </div>
 
     </div>

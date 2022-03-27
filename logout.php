@@ -5,11 +5,6 @@ session_start();
 session_unset();
 session_destroy();
 
-
-
-
-
-
 ?>
 
 <!doctype html>
@@ -25,15 +20,19 @@ session_destroy();
     <title>Hello, world!</title>
   </head>
   <body>
+<div class="container mt-4">
 
-          <div class="alert alert-warning" role="alert">
-          <h4 class="alert-heading">Logged Out</h4>
-          <p>You have been logged out successfully.
-          <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
 
-          <p>Please login to continue <a class="btn btn-primary" href="login.php" role="button">Login</a></p>
+
+  <div class="alert alert-warning" role="alert">
+    <h4 class="alert-heading">Logged Out</h4>
+    <p>You have been logged out successfully.
+      <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+      
+      <p>Please login to continue <a class="btn btn-primary" href="login.php" role="button">Login</a></p>
+    </div>
+    
   </div>
-
 
 
 

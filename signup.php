@@ -11,27 +11,35 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
     $username=$_POST['username'];
     $password=$_POST['password'];
     $cpassword=$_POST['cpassword'];
+    $existSql = "SELECT * FROM `users` WHERE username='$username'";
+    $result=mysqli_query($conn, $existSql);
+    $numExistRows= mysqli_num_rows($result); 
 
-    
+if($numExistRows>0){
 
-if(($password==$cpassword)&& !$exists){
+    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+    <strong>Error !! </strong> Username Already Exists
+    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>";
 
 
 
-    $sql = "INSERT INTO `users` ( `username`, `password`, `dt`) VALUES ( '$username', '$password', current_timestamp())";
-    
-    $result= mysqli_query($conn, $sql);
-    
-    if($result){
-        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-        <strong>Success</strong>Your account created Successfully ! Login to continue
-        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>";
+}else{ 
+    if($password==$cpassword){
+        $sql = "INSERT INTO `users` ( `username`, `password`, `dt`) VALUES ( '$username', '$password', current_timestamp())";
         
-    }
-}else{
-    $existAlert=true;
-}
+        $result= mysqli_query($conn, $sql);
+        
+        if($result){
+            echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+            <strong>Success</strong>Your account created Successfully ! Login to continue
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>";
+            
+            }
+        }else{
+            $existAlert=true;
+        }
     
+    }
 
 
 }
@@ -44,7 +52,6 @@ if(($password==$cpassword)&& !$exists){
 <!doctype html>
 <html lang="en">
 
-<!-- INSERT INTO `users` (`sno`, `username`, `password`, `dt`) VALUES (NULL, 'abc', 'abc', current_timestamp()); -->
 
 <head>
     <!-- Required meta tags -->
@@ -63,7 +70,7 @@ if(($password==$cpassword)&& !$exists){
     //require 'partials/_dbconn.php';
     ?>
 
-<?php
+    <?php
 if($existAlert){
     echo "'<div class='alert alert-danger alert-dismissible fade show' role='alert'>
     <strong>Success</strong>Passwords do not match
