@@ -25,7 +25,11 @@ if($numExistRows>0){
 
 }else{ 
     if($password==$cpassword){
-        $sql = "INSERT INTO `users` ( `username`, `password`, `dt`) VALUES ( '$username', '$password', current_timestamp())";
+
+
+        $hash=password_hash($password, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO `users` ( `username`, `password`, `dt`) VALUES ( '$username', '$hash', current_timestamp())";
         
         $result= mysqli_query($conn, $sql);
         
@@ -63,6 +67,8 @@ if($numExistRows>0){
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Signup-TechyTech</title>
+    <link rel="stylesheet" href="partials/styles.css">
+
 </head>
 
 <body>
@@ -71,11 +77,11 @@ if($numExistRows>0){
     ?>
 
     <?php
-if($existAlert){
-    echo "'<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-    <strong>Success</strong>Passwords do not match
-    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>'";
-};
+    if($existAlert){
+        echo "'<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+        <strong>Success</strong>Passwords do not match
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button> </div>'";
+    };
     
 ?>
 

@@ -1,36 +1,58 @@
 <?php
 
+$login=false;
 $exists=false;
 $showError= false;
-$login=false;
 
 if ($_SERVER["REQUEST_METHOD"]=="POST") {
 
     include 'partials/_dbconn.php';
-
+    
     $username=$_POST['username'];
     $password=$_POST['password'];
 
-    $sql="SELECT * FROM `users` WHERE username='$username' AND password= '$password'";
+    // password_verify( $password,  $hash);
+
+
+
+
+    // $sql="SELECT * FROM `users` WHERE username='$username' AND password= '$password'";
+    $sql= "SELECT * FROM `users` WHERE username='$username' ";
+
+
+
     $result= mysqli_query($conn, $sql);
     
     $num=mysqli_num_rows($result);
 
+    $row=mysqli_fetch_assoc($result);
+    
+    if($num>=1){
+        
+        $hash_pass= $row['password'];
 
-    if($num==1){
-        $login=true;
-        session_start();
-        $_SESSION['loggedin']=true;
-        $_SESSION['username']=$username;
-        header("location: welcome.php ");
+        if(password_verify($password, $hash_pass)){
+            
+
+            $login=true;
+            session_start();
+            $_SESSION['loggedin']=true;
+            $_SESSION['username']=$username;
+            header("location: welcome.php ");
+            
+            
+
+
+            }
+
+        
+            
 
     }else{
         $showError=true;
     }
 
-
 }
-
 
 ?>
 
@@ -53,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Login-TechyTech</title>
+    <link rel="stylesheet" href="partials/styles.css">
 </head>
 
 <body>
