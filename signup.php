@@ -27,7 +27,7 @@ if($numExistRows>0){
     if($password==$cpassword){
 
 
-        $hash=password_hash($password, PASSWORD_DEFAULT);
+        $hash=password_hash($password,PASSWORD_BCRYPT);
 
         $sql = "INSERT INTO `users` ( `username`, `password`, `dt`) VALUES ( '$username', '$hash', current_timestamp())";
         

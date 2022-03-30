@@ -4,7 +4,7 @@ $login=false;
 $exists=false;
 $showError= false;
 
-if ($_SERVER["REQUEST_METHOD"]=="POST") {
+if (isset($_POST['btnsubmit'])) {
 
     include 'partials/_dbconn.php';
     
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 
 
     // $sql="SELECT * FROM `users` WHERE username='$username' AND password= '$password'";
-    $sql= "SELECT * FROM `users` WHERE username='$username' ";
+    $sql= "SELECT * FROM `users` WHERE `username`='$username'";
 
 
 
@@ -25,25 +25,29 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
     
     $num=mysqli_num_rows($result);
 
-    $row=mysqli_fetch_assoc($result);
     
-    if($num>=1){
+    if($num==1){
+
         
-        $hash_pass= $row['password'];
 
-        if(password_verify($password, $hash_pass)){
+        while($row=mysqli_fetch_assoc($result)){
+
+
+           if(password_verify($password, $row['password'])){
+               echo "login successful";
+           }
+        }
+
+        // if(password_verify($password, $row['password'])){
             
 
-            $login=true;
-            session_start();
-            $_SESSION['loggedin']=true;
-            $_SESSION['username']=$username;
-            header("location: welcome.php ");
+        //     $login=true;
+        //     session_start();
+        //     $_SESSION['loggedin']=true;
+        //     $_SESSION['username']=$username;
+        //     header("location: welcome.php ");
             
-            
-
-
-            }
+        // }
 
         
             
@@ -81,8 +85,6 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 <body>
     <?php  require 'partials/_navbar.php';
     
-    
-
     if($login){
     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
         <strong>Success</strong>You are Logged in.
@@ -109,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
         <form action="login.php" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" aria-describedby="emailHelp" name="username">
+                <input type="text" class="form-control" id="username" name="username">
 
             </div>
             <div class="mb-3">
@@ -117,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
                 <input type="password" class="form-control" id="password" name="password">
             </div>
 
-            <button type="submit" name="Submit" class="btn btn-primary">Login</button>
+            <button type="submit" name="btnsubmit" class="btn btn-primary">Login</button>
         </form>
 
     </div>
